@@ -1,15 +1,27 @@
 <nav class="nav">
-    <h1>Yameen Store</h1>
-    <div class="nav-search">
+    <h1><a routerLink="/">Yameen Store</a></h1>
+    <div  *ngIf="menuType==='default'" class="nav-search">
         <input type="text" placeholder="Search for Product">
         <button class="search">
             Search
         </button>
-        <ul>
+        
+    </div>
+
+    <div [ngSwitch]="menuType">
+        <ul *ngSwitchCase="'default'">
             <li><a routerLink="/" >Home</a></li>
             <li><a routerLink="/sellerauth">Seller</a></li>
             <li><a href="#">Login</a></li>
-            <li><a href="#">Cart</a></li>
+            <li><a href="#">Cart</a></li> 
+        </ul>
+
+        <ul *ngSwitchCase="'seller'">
+            <li><a routerLink="/seller-addproduct" >Add Product</a></li>
+            <li><a routerLink="/seller-home">List</a></li>
+            <li><a (click)="logOut()">Log OUt</a></li>
+            <li><a href="#">{{sellerName|titlecase}}</a></li>
         </ul>
     </div>
+    
 </nav>

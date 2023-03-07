@@ -27,9 +27,9 @@ export class SellService {
   }
 
   userLogin(data:Login){
-   return this.http.get(`http://localhost:3000/seller?email=${data.email}&password=${data.password}`,{observe:'response'}).
+    this.http.get(`http://localhost:3000/seller?email=${data.email}&password=${data.password}`,{observe:'response'}).
     subscribe((result:any)=>{
-      console.log(localStorage.getItem('seller'));
+      
         if(result && result.body && result.body.length){
           localStorage.setItem('seller',JSON.stringify(result.body));
           this.route.navigate(['seller-home']);

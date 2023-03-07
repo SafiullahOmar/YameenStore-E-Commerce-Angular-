@@ -1,3 +1,11 @@
 {
-    "seller":[]
+  "seller": [
+    {
+      "name": "kj",
+      "password": "kj",
+      "email": "kj@gg.com",
+      "id": 1
+    }
+  ],
+  "products": []
 }
