@@ -22,7 +22,8 @@
           <td>{{ item.category }}</td>
           <td>{{ item.description }}</td>
           <td>
-            
+            <fa-icon (click)="deleteProduct(item.id)" [icon]="icon"></fa-icon>
+            <a class="adjust-update-link" routerLink="/seller-updateProduct/{{item.id}}"> <fa-icon  [icon]="iconEdit"></fa-icon></a>
           </td>
         </tr>
       </tbody>
