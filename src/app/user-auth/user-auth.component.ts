@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Login, product, SignUp } from '../dataType';
+import { cart, Login, product, SignUp } from '../dataType';
 import { ProductService } from '../service/product.service';
 import { UserService } from '../service/user.service';
 

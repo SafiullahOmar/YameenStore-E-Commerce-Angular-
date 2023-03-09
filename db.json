@@ -27,5 +27,13 @@
       "id": 2
     }
   ],
-  "user":[]
+  "user": [
+    {
+      "name": "khan",
+      "email": "khan@gmial.com",
+      "password": "khan",
+      "id": 1
+    }
+  ],
+  "cart":[]
 }

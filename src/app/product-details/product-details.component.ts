@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { product } from '../dataType';
+import { cart, product } from '../dataType';
 import { ProductService } from '../service/product.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ProductService } from '../service/product.service';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']
 })
-export class ProductDetailsComponent {
+export class ProductDetailsComponent implements OnInit {
 
   productData:undefined | product;
   productQuantity:number=1;

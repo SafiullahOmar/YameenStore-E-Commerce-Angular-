@@ -9,55 +9,53 @@ import { ProductService } from '../service/product.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  menuType:string='default';
-  sellerName:string='';
+  menuType: string = 'default';
+  sellerName:string="";
   userName:string="";
-  cartItems=0;
   searchResult:undefined|product[];
-  /**
-   *
-   */
-  constructor(private route:Router, private product:ProductService) {
-    
-    
-  }
+  cartItems=0;
+  constructor(private route: Router, private product:ProductService) {}
+
   ngOnInit(): void {
-    this.route.events.subscribe((val:any)=>{
-      if(val.url){
-        if(localStorage.getItem('seller')&& val.url.includes('seller')){
-        
-          let details=localStorage.getItem('seller');
-          let data=details && JSON.parse(details);
-          this.sellerName=data.name; 
-          this.menuType="seller";
-          
-        }else if(localStorage.getItem('user')){
+    this.route.events.subscribe((val: any) => {
+      if (val.url) {
+        if (localStorage.getItem('seller') && val.url.includes('seller')) {
+         let sellerStore=localStorage.getItem('seller');
+         let sellerData =sellerStore && JSON.parse(sellerStore)[0];
+         this.sellerName=sellerData.name;
+          this.menuType = 'seller';
+        }
+        else if(localStorage.getItem('user')){
           let userStore = localStorage.getItem('user');
           let userData = userStore && JSON.parse(userStore);
           this.userName= userData.name;
           this.menuType='user';
           this.product.getCartList(userData.id);
         }
-        else{
-
-          console.log("outside seller");
-          this.menuType="default";
-
+         else {
+          this.menuType = 'default';
         }
       }
     });
+    let cartData= localStorage.getItem('localCart');
+    if(cartData){
+      this.cartItems= JSON.parse(cartData).length
+    }
+    this.product.cartData.subscribe((items)=>{
+      this.cartItems= items.length
+    })
   }
-
   logOut(){
     localStorage.removeItem('seller');
-    console.log('logout');
-    this.route.navigate(['/']);
+    this.route.navigate(['/'])
   }
+
   userLogout(){
     localStorage.removeItem('user');
     this.route.navigate(['/user-auth'])
     this.product.cartData.emit([])
   }
+
   searchProduct(query:KeyboardEvent){
     if(query){
       const element = query.target as HTMLInputElement;
